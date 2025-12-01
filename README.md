@@ -1,5 +1,26 @@
-#  Vending Machine Service
- ## 1. Requirements
+# Vending Machine Service
+### A Spring Boot backend service simulating a vending machine
+
+## Features
+- **Secure REST APIs** with role-based access, JWT authentication, and token validation.
+- **Global exception handling** with consistent error responses.
+- **Aspect-Oriented Programming (AOP)** for access validation and cross-cutting concerns.
+- **Comprehensive unit & integration test suite**.
+
+## Infrastructure & Deployment
+- **Fully containerized setup** using Docker for both the application and database.
+- **Automatic database initialization** via `schema.sql` and `data.sql` to provision tables and seed default items on startup.
+- **Docker Compose orchestration** for running the full environment with one command.
+- **Environment-based configuration** using Spring Profiles for local, test, and containerized deployments.
+
+## Tech Stack
+- **Backend:** Java 17, Spring Boot (Web, Security, JPA)
+- **Database:** MySQL (auto-initialized)
+- **Build & Dependency Management:** Maven
+- **Testing:** JUnit 5, Mockito, MockMvc
+- **Containerization:** Docker, Docker Compose
+---
+ ## Requirements
 - REST API should be implemented consuming and producing “application/json”.
 - Implement a product model with amountAvailable, cost, productName and sellerId fields.
 - Implement a user model with username, password, deposit and role fields.
@@ -9,15 +30,9 @@
 - Implement /buy endpoint (accepts productId, amount of products) so users with a “buyer” role can buy products with the money they’ve deposited. API should return the total they’ve spent, products they’ve purchased and their change if there’s any (in 5, 10, 20, 50 and 100 cents coins).
 - Implement /reset endpoint so users with a “buyer” role can reset their deposit.
 
-## 2. Tech stack and conclusion
-- Designed and implemented a secure, Dockerized Spring Boot backend service for a vending machine system with role-based access (buyer/seller), product purchase workflows, and JWT authentication. 
-- Utilized Spring Security, Spring Data JPA, and MySQL with schema auto-initialization via Docker Compose.
-- Built REST APIs with global exception handling and aspect-oriented ownership checking.
-- Developed comprehensive unit and integration tests using Mockito, MockMvc, and Spring Boot Test.
+## How to Run Vending Machine App with Docker
 
-## 3.  How to Run Vending Machine App with Docker
-
-### 3.1 Prerequisites 
+#### Prerequisites 
 - Both `8080` and  `3306` ports are free as they will be consumed by the app.
 - Docker and Docker Compose installed. (see [Notes](#notes) for versions recommendation)
 - Create a `.env` file in the root directory of the project with the following variables ( contact me to get the values ):
@@ -33,7 +48,7 @@
   ```
 
 
- ### 3.2 Build & Run
+ #### Build & Run
 I have added `Makefile` to make it easy for you to spin up the project.
 
 #### All you need is to change the directory to the project root and run any of the following command based on your need: -
@@ -51,6 +66,6 @@ I have added `Makefile` to make it easy for you to spin up the project.
 - The recommended versions of docker is `v24.x.x` and for docker-compose `v2.24.x+`
 - The application will be available at `http://localhost:8080/api/v1` after running `make run`
 - Default database will be created automatically with the schema from `src/main/resources/db/schema.sql`
-- JWT tokens expire after 24 hours by default
+- JWT tokens expire after 24 hours by default (configurable)
 
 ## Thanks
